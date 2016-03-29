@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">物流助手</string>
+    <string name="prompt_email">邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">注册</string>
+    <string name="action_log_in">登陆</string>
+    <string name="action_sign_in_short">登陆</string>
+    <string name="error_invalid_email">无效的邮箱名</string>
+    <string name="error_invalid_password">密码太短</string>
+    <string name="error_incorrect_password">密码不正确</string>
+    <string name="error_field_required">必须填写</string>
+    <string name="permission_rationale">"需要邮箱授权。"</string>
+    <string name="log_in_ok">成功登陆</string>
+    <string name="order">请输入快递单号</string>
+    <string name="search">查询</string>
+    <string name="search_on_web">在网页端搜索</string>
+    <string name="version_code">版本号:0.9</string>
+    <string name="nav_search">查询</string>
+    <string name="nav_history">记录</string>
+    <string name="nav_setting">设置</string>
+    <string name="nav_share">分享</string>
+    <string name="nav_social">社交</string>
+    <string name="share_message">我向你推荐这款app,它很好用并且可以在这里下载：</string>
+    <string name="send_to">发送到…</string>
+    <string name="save_email_pw">保存邮箱和密码</string>
+    <string name="auto_login">自动登录</string>
+    <string name="web_notify">请点击在网页端搜索按钮</string>
+    <string name="policy">法律信息</string>
+</resources>

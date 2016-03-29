@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">ExpressAssist</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_log_in">Log in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="log_in_ok">Login successful!</string>
+    <string name="title_activity_container">ContainerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="order">Please input your express number</string>
+    <string name="search">Start search</string>
+    <string name="search_on_web">Search express message on web</string>
+    <string name="version_code">Version:0.9</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_history">History</string>
+    <string name="nav_setting">Setting</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_social">Communication</string>
+    <string name="share_message">I prompt this app to you for its useful,you can download it at this address:</string>
+    <string name="send_to">Send to …</string>
+    <string name="save_email_pw">Save email&amp;password</string>
+    <string name="auto_login">Auto login</string>
+    <string name="web_notify">Please search by click web search button</string>
+    <string name="policy">Policy Message</string>
+</resources>
