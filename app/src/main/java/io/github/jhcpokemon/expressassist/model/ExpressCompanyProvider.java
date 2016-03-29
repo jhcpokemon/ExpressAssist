@@ -41,6 +41,17 @@ public class ExpressCompanyProvider {
         return code;
     }
 
+    public String getCompanyName(String code) {
+        String name = "";
+        for (Company company : companies) {
+            if (company.code.equals(code)) {
+                name = company.name;
+                break;
+            }
+        }
+        return name;
+    }
+
     public List<Company> getCompanies() {
         return companies;
     }

@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Bind(R.id.password)
     EditText mPasswordView;
     //    @Bind(R.id.login_progress)
-//    ProgressBar mProgressView;
+    //    ProgressBar mProgressView;
     @Bind(R.id.save_email_pw)
     CheckBox saveEmailAndPwCB;
     @Bind(R.id.auto_login)

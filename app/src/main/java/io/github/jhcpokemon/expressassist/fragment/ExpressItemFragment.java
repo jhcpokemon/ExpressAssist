@@ -43,11 +43,11 @@ public class ExpressItemFragment extends Fragment {
         return view;
     }
 
-    public interface OnListItemClickListener {
-        void onListItemClicked(ExpressLog log);
+    public void setOnItemClickListener(OnListItemClickListener listener) {
+        mListener = listener;
     }
 
-    public void setOnClickListener(OnListItemClickListener listener) {
-        mListener = listener;
+    public interface OnListItemClickListener {
+        void onListItemClicked(ExpressLog log);
     }
 }

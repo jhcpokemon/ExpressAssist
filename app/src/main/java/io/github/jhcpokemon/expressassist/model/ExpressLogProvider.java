@@ -7,6 +7,6 @@ public class ExpressLogProvider {
     private static List<ExpressLog> LOGS = new ArrayList<>();
 
     public static List<ExpressLog> getLOGS() {
-        return LOGS;
+        return ExpressLog.listAll(ExpressLog.class);
     }
 }

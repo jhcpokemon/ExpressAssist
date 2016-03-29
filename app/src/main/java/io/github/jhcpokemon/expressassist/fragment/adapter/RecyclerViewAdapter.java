@@ -34,6 +34,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.mLog = mLogs.get(position);
         holder.mOrderView.setText(mLogs.get(position).order);
         holder.mDataView.setText(mLogs.get(position).date);
+        holder.mNameView.setText(mLogs.get(position).name);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public final View mView;
         public final TextView mOrderView;
         public final TextView mDataView;
+        public final TextView mNameView;
         public ExpressLog mLog;
 
         public ViewHolder(View view) {
@@ -61,6 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mView = view;
             mOrderView = (TextView) view.findViewById(R.id.order);
             mDataView = (TextView) view.findViewById(R.id.date);
+            mNameView = (TextView) view.findViewById(R.id.name);
         }
 
     }

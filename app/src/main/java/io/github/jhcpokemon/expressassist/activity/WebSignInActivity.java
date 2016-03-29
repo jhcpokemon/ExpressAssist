@@ -1,7 +1,8 @@
 package io.github.jhcpokemon.expressassist.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
 import butterknife.Bind;
@@ -17,7 +18,12 @@ public class WebSignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_sign_in);
         ButterKnife.bind(this);
-        webView.loadUrl("http://jhcpokemon.github.io/others/sign-in.html");
+        Intent intent = getIntent();
+        if (intent.getStringExtra("uri") != null) {
+            webView.loadUrl(intent.getStringExtra("uri"));
+        } else {
+            webView.loadUrl("http://jhcpokemon.github.io/others/sign-in.html");
+        }
     }
 
     @Override

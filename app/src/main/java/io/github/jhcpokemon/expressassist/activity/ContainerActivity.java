@@ -16,7 +16,7 @@ import io.github.jhcpokemon.expressassist.R;
 import io.github.jhcpokemon.expressassist.fragment.ExpressItemFragment;
 import io.github.jhcpokemon.expressassist.fragment.SearchFragment;
 import io.github.jhcpokemon.expressassist.fragment.SettingFragment;
-import io.github.jhcpokemon.expressassist.model.ExpressLogProvider;
+import io.github.jhcpokemon.expressassist.model.ExpressLog;
 
 public class ContainerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ExpressItemFragment.OnListItemClickListener {
@@ -36,7 +36,7 @@ public class ContainerActivity extends AppCompatActivity
         historyFragment = ExpressItemFragment.newInstance();
         searchFragment = new SearchFragment();
         settingFragment = new SettingFragment();
-        historyFragment.setOnClickListener(this);
+        historyFragment.setOnItemClickListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,7 +87,7 @@ public class ContainerActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListItemClicked(ExpressLogProvider.ExpressItem item) {
-        Toast.makeText(getApplicationContext(), item.order, Toast.LENGTH_SHORT).show();
+    public void onListItemClicked(ExpressLog mLog) {
+        Toast.makeText(getApplicationContext(), mLog.order, Toast.LENGTH_SHORT).show();
     }
 }
