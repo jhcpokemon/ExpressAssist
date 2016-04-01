@@ -27,4 +27,6 @@
     <string name="auto_login">自动登录</string>
     <string name="web_notify">请点击在网页端搜索按钮</string>
     <string name="policy">法律信息</string>
+    <string name="status_0">暂无物流信息</string>
+    <string name="status_2">API接口出错，请重试</string>
 </resources>

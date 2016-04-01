@@ -36,4 +36,6 @@
     <string name="auto_login">Auto login</string>
     <string name="web_notify">Please search by click web search button</string>
     <string name="policy">Policy Message</string>
+    <string name="status_0">There is no express message now</string>
+    <string name="status_2">There is something wrong,please retry</string>
 </resources>

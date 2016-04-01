@@ -1,6 +1,11 @@
 package io.github.jhcpokemon.expressassist.util;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +39,23 @@ public class UtilPack {
             list.add(s.split("=")[1]);
         }
         return list;
+    }
+
+    public static String getJsonData(String uri) {
+        StringBuilder jsonSB = new StringBuilder();
+        URL httpURL;
+        String line;
+        try {
+            httpURL = new URL(uri);
+            HttpURLConnection connection = (HttpURLConnection) httpURL.openConnection();
+            InputStreamReader reader = new InputStreamReader(connection.getInputStream());
+            BufferedReader bReader = new BufferedReader(reader);
+            while ((line = bReader.readLine()) != null) {
+                jsonSB.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jsonSB.toString();
     }
 }
