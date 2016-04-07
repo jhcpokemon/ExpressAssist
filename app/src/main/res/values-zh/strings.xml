@@ -35,4 +35,7 @@
     <string name="log_item_order">运单号:</string>
     <string name="log_item_name">快递公司:</string>
     <string name="error_network">请检查网络连接</string>
+    <string name="navigation_drawer_open">打开导航栏</string>
+    <string name="navigation_drawer_close">关闭导航栏</string>
+    <string name="action_settings">设置</string>
 </resources>
