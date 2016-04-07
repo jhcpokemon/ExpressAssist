@@ -1,12 +1,12 @@
 package io.github.jhcpokemon.expressassist.model;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ExpressLogProvider {
-    private static List<ExpressLog> LOGS = new ArrayList<>();
-
     public static List<ExpressLog> getLOGS() {
-        return ExpressLog.listAll(ExpressLog.class);
+        List<ExpressLog> logs = ExpressLog.listAll(ExpressLog.class);
+        Collections.reverse(logs);
+        return logs;
     }
 }

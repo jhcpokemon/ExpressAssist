@@ -29,4 +29,10 @@
     <string name="policy">法律信息</string>
     <string name="status_0">暂无物流信息</string>
     <string name="status_2">API接口出错，请重试</string>
+    <string name="input_pw">请输入密码</string>
+    <string name="error_retry">请输入正确的账户信息并重新登录</string>
+    <string name="clear">清除账户信息</string>
+    <string name="log_item_order">运单号:</string>
+    <string name="log_item_name">快递公司:</string>
+    <string name="error_network">请检查网络连接</string>
 </resources>

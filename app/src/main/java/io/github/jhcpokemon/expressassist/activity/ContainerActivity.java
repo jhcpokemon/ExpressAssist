@@ -1,6 +1,9 @@
 package io.github.jhcpokemon.expressassist.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -41,21 +44,30 @@ public class ContainerActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        assert drawer != null;
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
+        if (!isOnline()) {
+            Toast.makeText(getApplicationContext(), R.string.error_network, Toast.LENGTH_LONG).show();
+        }
+
 
         Intent intent = getIntent();
-        if (intent.getStringExtra("from").equals("login")) {
+        if (!intent.getBooleanExtra("empty", false)) {
             manager.beginTransaction().add(R.id.container, historyFragment).commit();
+        } else {
+            manager.beginTransaction().add(R.id.container, searchFragment).commit();
         }
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawer != null;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -82,12 +94,21 @@ public class ContainerActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawer != null;
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
     public void onListItemClicked(ExpressLog mLog) {
-        Toast.makeText(getApplicationContext(), mLog.order, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ContainerActivity.this, DetailActivity.class);
+        intent.putExtra("log", mLog);
+        startActivity(intent);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

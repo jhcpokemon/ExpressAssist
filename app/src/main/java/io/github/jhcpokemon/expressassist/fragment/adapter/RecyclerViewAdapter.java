@@ -1,6 +1,7 @@
 package io.github.jhcpokemon.expressassist.fragment.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +33,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mLog = mLogs.get(position);
-        holder.mOrderView.setText(mLogs.get(position).order);
-        holder.mDataView.setText(mLogs.get(position).date);
-        holder.mNameView.setText(mLogs.get(position).name);
+        Log.i("Log", holder.mLog.toString());
+        holder.mOrderView.append(mLogs.get(position).express_order);
+        holder.mDateView.setText(mLogs.get(position).express_date);
+        holder.mNameView.append(mLogs.get(position).company_name);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mOrderView;
-        public final TextView mDataView;
+        public final TextView mDateView;
         public final TextView mNameView;
         public ExpressLog mLog;
 
@@ -62,7 +64,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(view);
             mView = view;
             mOrderView = (TextView) view.findViewById(R.id.order);
-            mDataView = (TextView) view.findViewById(R.id.date);
+            mDateView = (TextView) view.findViewById(R.id.date);
             mNameView = (TextView) view.findViewById(R.id.name);
         }
 

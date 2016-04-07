@@ -1,12 +1,10 @@
 package io.github.jhcpokemon.expressassist.util;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.mail.internet.AddressException;
@@ -16,6 +14,8 @@ import javax.mail.internet.InternetAddress;
  * 验证是否为有效的邮箱地址
  */
 public class UtilPack {
+    public static final String TAG = "MYLOG";
+
     public static int statusCode(String email) {
         int resultCode = 0;
         try {
@@ -35,27 +35,12 @@ public class UtilPack {
         List<String> list = new ArrayList<>();
         String query = uri.split("\\?")[1];
         String[] pairs = query.split("&");
+        Log.i(TAG, Arrays.deepToString(pairs));
         for (String s : pairs) {
-            list.add(s.split("=")[1]);
+            if (s.contains("=")) {
+                list.add(s.split("=")[1]);
+            }
         }
         return list;
-    }
-
-    public static String getJsonData(String uri) {
-        StringBuilder jsonSB = new StringBuilder();
-        URL httpURL;
-        String line;
-        try {
-            httpURL = new URL(uri);
-            HttpURLConnection connection = (HttpURLConnection) httpURL.openConnection();
-            InputStreamReader reader = new InputStreamReader(connection.getInputStream());
-            BufferedReader bReader = new BufferedReader(reader);
-            while ((line = bReader.readLine()) != null) {
-                jsonSB.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return jsonSB.toString();
     }
 }

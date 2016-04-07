@@ -1,5 +1,5 @@
-{
-	"companies": [{
+[
+	{
 		"code": "aae",
 		"name": "AAE"
 	}, {
@@ -335,5 +335,5 @@
 	}, {
 		"code": "zhongtong",
 		"name": "中通速递"
-	}]
 }
+]

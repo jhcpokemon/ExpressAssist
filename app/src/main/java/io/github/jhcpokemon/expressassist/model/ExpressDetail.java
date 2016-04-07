@@ -40,4 +40,14 @@ public class ExpressDetail {
     public void setData(List<Data> data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "ExpressDetail{" +
+                "message='" + message + '\'' +
+                ", status='" + status + '\'' +
+                ", state='" + state + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

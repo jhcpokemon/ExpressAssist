@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:text="@string/log_item_order"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="16sp"
-        tools:text="运单号:881379220642379431" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/date"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/date"
         android:layout_below="@id/order"
-        android:textAppearance="?attr/textAppearanceListItem"
-        tools:text="快递公司：EMS" />
+        android:text="@string/log_item_name"
+        android:textAppearance="?attr/textAppearanceListItem" />
 
 </RelativeLayout>

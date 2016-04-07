@@ -15,9 +15,11 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.jhcpokemon.expressassist.R;
+import io.github.jhcpokemon.expressassist.model.ExpressLog;
+import io.github.jhcpokemon.expressassist.model.ExpressLogProvider;
 import io.github.jhcpokemon.expressassist.util.UtilPack;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, View.OnLongClickListener {
 
     /**
      * UI
@@ -45,14 +47,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        ExpressLog log = new ExpressLog("", "", "", "");
+        log.save();
+        log.delete();
         mSharedPreferences = getSharedPreferences("user_msg", MODE_APPEND);
+        mEditor = mSharedPreferences.edit();
         if (mSharedPreferences.getAll().isEmpty()) {
             mEditor.putString("email", "");
             mEditor.putString("password", "");
             mEditor.putBoolean("save", false);
             mEditor.putBoolean("auto", false);
+            mEditor.apply();
         }
         mEmailSignInButton.setOnClickListener(this);
+        mEmailSignInButton.setOnLongClickListener(this);
         mEmailLogInButton.setOnClickListener(this);
         saveEmailAndPwCB.setOnCheckedChangeListener(this);
         autoLoginCB.setOnCheckedChangeListener(this);
@@ -78,11 +86,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.email_sign_in_button:
-                //startActivity(new Intent(LoginActivity.this,WebSignInActivity.class));
                 String email;
                 String password;
                 if (mSharedPreferences.getString("email", "").equals("")) {
-                    mEditor = mSharedPreferences.edit();
                     email = mEmailView.getText().toString();
                     password = mPasswordView.getText().toString();
                     switch (UtilPack.statusCode(email)) {
@@ -92,7 +98,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 mEditor.putString("password", password);
                                 mEditor.putBoolean("save", saveEmailAndPwCB.isChecked());
                                 mEditor.putBoolean("auto", autoLoginCB.isChecked());
+                                mEditor.apply();
                                 login();
+                            } else {
+                                Toast.makeText(getApplicationContext(), R.string.input_pw, Toast.LENGTH_SHORT).show();
                             }
                             break;
                         case 1:
@@ -102,12 +111,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             break;
                     }
                     mEditor.apply();
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.error_retry, Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.email_log_in_button:
-                if (UtilPack.valid(mEmailView.getText().toString(), mPasswordView.getText().toString())) {
+                if (UtilPack.valid(mEmailView.getText().toString(), mPasswordView.getText().toString())
+                        && mPasswordView.getText().toString().equals(mSharedPreferences.getString("password", ""))) {
                     login();
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.error_retry, Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
@@ -117,7 +131,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void login() {
         Intent mIntent = new Intent(LoginActivity.this, ContainerActivity.class);
-        mIntent.putExtra("from", "login");
+        if (ExpressLogProvider.getLOGS().size() == 0) {
+            mIntent.putExtra("empty", true);
+        } else {
+            mIntent.putExtra("empty", false);
+        }
         startActivity(mIntent);
     }
 
@@ -126,13 +144,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (buttonView.getId()) {
             case R.id.save_email_pw:
                 mEditor.putBoolean("save", saveEmailAndPwCB.isChecked());
+                mEditor.apply();
                 break;
             case R.id.auto_login:
                 mEditor.putBoolean("auto", autoLoginCB.isChecked());
+                mEditor.apply();
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        startActivity(new Intent(LoginActivity.this, WebSignInActivity.class));
+        return true;
     }
 }
 

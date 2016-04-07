@@ -15,7 +15,6 @@
         completions."
     </string>
     <string name="log_in_ok">Login successful!</string>
-    <string name="title_activity_container">ContainerActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -38,4 +37,10 @@
     <string name="policy">Policy Message</string>
     <string name="status_0">There is no express message now</string>
     <string name="status_2">There is something wrong,please retry</string>
+    <string name="input_pw">Please input password</string>
+    <string name="error_retry">Please try to login again with correct info</string>
+    <string name="clear">Clear account message</string>
+    <string name="log_item_order">Order:</string>
+    <string name="log_item_name">Company Name:</string>
+    <string name="error_network">Please check your internet access</string>
 </resources>
