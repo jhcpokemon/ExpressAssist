@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'aria'
+            keyPassword 'jhc19940310'
+            storeFile file('C:/Users/pokemon/Dropbox/keyStore.jks')
+            storePassword 'jhc19940310'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "24.0.0 rc1"
     defaultConfig {
@@ -9,11 +17,18 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.release
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            jniDebuggable true
+            signingConfig signingConfigs.release
+            renderscriptDebuggable true
+            zipAlignEnabled true
+            pseudoLocalesEnabled true
         }
     }
     productFlavors {
@@ -24,11 +39,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile files('libs/javax.mail.jar')
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.github.satyan:sugar:1.5'
     compile 'com.alibaba:fastjson:1.1.46.android'
 }

@@ -28,14 +28,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     AutoCompleteTextView mEmailView;
     @Bind(R.id.password)
     EditText mPasswordView;
-    //    @Bind(R.id.login_progress)
-    //    ProgressBar mProgressView;
     @Bind(R.id.save_email_pw)
     CheckBox saveEmailAndPwCB;
     @Bind(R.id.auto_login)
     CheckBox autoLoginCB;
-    @Bind(R.id.email_sign_in_button)
-    Button mEmailSignInButton;
+    @Bind(R.id.email_register_button)
+    Button mEmailRegisterButton;
     @Bind(R.id.email_log_in_button)
     Button mEmailLogInButton;
 
@@ -59,8 +57,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mEditor.putBoolean("auto", false);
             mEditor.apply();
         }
-        mEmailSignInButton.setOnClickListener(this);
-        mEmailSignInButton.setOnLongClickListener(this);
+        mEmailRegisterButton.setOnClickListener(this);
+        mEmailRegisterButton.setOnLongClickListener(this);
         mEmailLogInButton.setOnClickListener(this);
         saveEmailAndPwCB.setOnCheckedChangeListener(this);
         autoLoginCB.setOnCheckedChangeListener(this);
@@ -85,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.email_sign_in_button:
+            case R.id.email_register_button:
                 String email;
                 String password;
                 if (mSharedPreferences.getString("email", "").equals("")) {
@@ -157,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onLongClick(View v) {
-        startActivity(new Intent(LoginActivity.this, WebSignInActivity.class));
+        startActivity(new Intent(LoginActivity.this, WebRegisterActivity.class));
         return true;
     }
 }

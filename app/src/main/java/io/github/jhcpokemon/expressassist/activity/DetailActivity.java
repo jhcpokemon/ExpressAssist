@@ -177,6 +177,7 @@ public class DetailActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             ExpressDetail expressDetail = JSON.parseObject(result, ExpressDetail.class);
+            Log.i(UtilPack.TAG, expressDetail.toString());
             progressBar.setVisibility(View.GONE);
             switch (expressDetail.getStatus()) {
                 case "0":

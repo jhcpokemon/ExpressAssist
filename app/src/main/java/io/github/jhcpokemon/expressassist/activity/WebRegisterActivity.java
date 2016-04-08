@@ -12,7 +12,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.github.jhcpokemon.expressassist.R;
 
-public class WebSignInActivity extends AppCompatActivity {
+public class WebRegisterActivity extends AppCompatActivity {
     @Bind(R.id.web_view)
     WebView webView;
     @Bind(R.id.progress_bar)
