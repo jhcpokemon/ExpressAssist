@@ -3,6 +3,7 @@ package io.github.jhcpokemon.expressassist.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import io.github.jhcpokemon.expressassist.model.Company;
 import io.github.jhcpokemon.expressassist.model.ExpressCompanyProvider;
 import io.github.jhcpokemon.expressassist.util.IntentIntegrator;
 import io.github.jhcpokemon.expressassist.util.IntentResult;
+import io.github.jhcpokemon.expressassist.util.UtilPack;
 
 public class SearchFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     public static final String UID = "id=72ea3bfc8a4465dc";
@@ -73,6 +75,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ad
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
+            Log.i(UtilPack.TAG, result.toString());
             orderEditText.setText(result.getContents());
         }
     }
@@ -89,7 +92,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ad
         String uri;
         switch (v.getId()) {
             case R.id.scan_btn:
-                IntentIntegrator intentIntegrator = new IntentIntegrator(getActivity());
+                IntentIntegrator intentIntegrator = new IntentIntegrator(this);
                 intentIntegrator.initiateScan();
                 break;
             case R.id.search:

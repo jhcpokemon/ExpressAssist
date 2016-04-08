@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="@dimen/item_padding"
+    android:paddingEnd="@dimen/item_padding"
     android:orientation="vertical"
-    android:padding="@dimen/item_padding"
     tools:context="io.github.jhcpokemon.expressassist.fragment.SearchFragment">
 
     <LinearLayout

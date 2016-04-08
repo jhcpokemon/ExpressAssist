@@ -44,7 +44,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
     TextView policyTextView;
     @Bind(R.id.clear)
     TextView clearTextView;
-    private long firstClick;
     private int count = 5;
 
     public SettingFragment() {
@@ -82,8 +81,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 getActivity().finish();
                 break;
             case R.id.version:
-                if (count == 5) firstClick = SystemClock.uptimeMillis();
-                if (SystemClock.uptimeMillis() - firstClick > 1500 && count == 0) {
+                if (count == 0) {
                     Dialog imageDialog = new Dialog(getContext());
                     ViewGroup.LayoutParams params = imageDialog.getWindow().getAttributes();
                     params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -94,8 +92,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                     imageDialog.setCancelable(true);
                     imageDialog.show();
                     versionTextView.setClickable(false);
+                } else {
+                    count--;
                 }
-                count--;
                 break;
             case R.id.policy:
                 Dialog policyDialog = new Dialog(getContext()) {
