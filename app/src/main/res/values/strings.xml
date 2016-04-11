@@ -44,4 +44,5 @@
     <string name="log_item_name">Company Name:</string>
     <string name="error_network">Please check your internet access</string>
     <string name="empty_order">Please input order number</string>
+    <string name="log_out">Log out</string>
 </resources>

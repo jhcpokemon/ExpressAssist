@@ -2,9 +2,12 @@ package io.github.jhcpokemon.expressassist.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -12,23 +15,44 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.plus.Plus;
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.concurrent.ExecutionException;
 
 import io.github.jhcpokemon.expressassist.R;
 import io.github.jhcpokemon.expressassist.fragment.ExpressItemFragment;
 import io.github.jhcpokemon.expressassist.fragment.SearchFragment;
 import io.github.jhcpokemon.expressassist.fragment.SettingFragment;
 import io.github.jhcpokemon.expressassist.model.ExpressLog;
+import io.github.jhcpokemon.expressassist.util.UtilPack;
 
 public class ContainerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ExpressItemFragment.OnListItemClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ExpressItemFragment.OnListItemClickListener, View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private FragmentManager manager;
     private ExpressItemFragment historyFragment;
     private SearchFragment searchFragment;
     private SettingFragment settingFragment;
-
+    private ImageLoader imageLoader;
+    private GoogleApiClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +64,7 @@ public class ContainerActivity extends AppCompatActivity
         searchFragment = new SearchFragment();
         settingFragment = new SettingFragment();
         historyFragment.setOnItemClickListener(this);
+        imageLoader = LoginActivity.imageLoader;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,13 +80,44 @@ public class ContainerActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), R.string.error_network, Toast.LENGTH_LONG).show();
         }
 
+        View header = navigationView.getHeaderView(0);
+        RoundedImageView avatarImageView = (RoundedImageView) header.findViewById(R.id.avatar_img);
+        TextView mailTextView = (TextView) header.findViewById(R.id.gms_mail_text);
+        TextView nameTextView = (TextView) header.findViewById(R.id.gms_name_text);
+        Button logoutBtn = (Button) header.findViewById(R.id.gms_log_out_btn);
+        logoutBtn.setOnClickListener(this);
 
         Intent intent = getIntent();
+        if (intent.getParcelableExtra("account") != null) {
+            GoogleSignInAccount account = intent.getParcelableExtra("account");
+            try {
+                avatarImageView.setImageBitmap(new ImageLoadTask().execute(account.getPhotoUrl().toString()).get());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+            mailTextView.setText(account.getEmail());
+            nameTextView.setText(account.getDisplayName());
+        }
         if (!intent.getBooleanExtra("empty", false)) {
             manager.beginTransaction().add(R.id.container, historyFragment).commit();
         } else {
             manager.beginTransaction().add(R.id.container, searchFragment).commit();
         }
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestScopes(new Scope(Scopes.PLUS_LOGIN))
+                .requestEmail()
+                .build();
+        client = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addApi(Plus.API)
+                .build();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        client.connect();
     }
 
     @Override
@@ -71,7 +127,7 @@ public class ContainerActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finishAffinity();
         }
     }
 
@@ -110,5 +166,46 @@ public class ContainerActivity extends AppCompatActivity
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.gms_log_out_btn:
+                signOut();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        client.disconnect();
+
+    }
+
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(client).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                finish();
+            }
+        });
+        ExpressLog.deleteAll(ExpressLog.class);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    class ImageLoadTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            return imageLoader.loadImageSync(params[0]);
+        }
     }
 }

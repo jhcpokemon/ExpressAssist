@@ -39,4 +39,5 @@
     <string name="navigation_drawer_close">关闭导航栏</string>
     <string name="action_settings">设置</string>
     <string name="empty_order">请输入运单号</string>
+    <string name="log_out">登出</string>
 </resources>

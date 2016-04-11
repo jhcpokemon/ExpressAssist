@@ -66,7 +66,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/email_register_button"
@@ -87,6 +88,13 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/action_log_in" />
-
     </LinearLayout>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/gms_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin" />
 </LinearLayout>

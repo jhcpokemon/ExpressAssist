@@ -78,7 +78,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                 editor.putBoolean("auto", false);
                 editor.apply();
                 ExpressLog.deleteAll(ExpressLog.class);
-                getActivity().finish();
+                getActivity().finishAffinity();
                 break;
             case R.id.version:
                 if (count == 0) {
