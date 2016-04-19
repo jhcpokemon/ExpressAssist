@@ -19,13 +19,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.plus.Plus;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -199,6 +196,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
             mIntent.putExtra("empty", false);
         }
+        mIntent.putExtra("mail", mEmailView.getText().toString());
         return mIntent;
     }
 
@@ -226,12 +224,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void googleSignInPrepare() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestScopes(new Scope(Scopes.PLUS_LOGIN))
                 .requestEmail()
                 .build();
         client = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .addApi(Plus.API)
                 .build();
         gmsButton.setScopes(gso.getScopeArray());
         gmsButton.setSize(SignInButton.SIZE_STANDARD);

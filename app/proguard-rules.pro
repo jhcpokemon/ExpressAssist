@@ -4,6 +4,7 @@
 -keep public class * extends android.support.v4.app.Fragment
 -keep public class * extends android.support.v7.widget.RecyclerView
 
+-keep class com.google.android.gms.** {*;}
 #support-v7
 -dontwarn android.support.v7.**
 -keep class android.support.v7.** { *; }
@@ -40,6 +41,15 @@
 -keep public class * implements java.io.Serializable {
         public *;
 }
+
+
+-keep class com.nostra13.universalimageloader.** {*;}
+
+-keep class com.makeramen.roundedimageview.** {*;}
+
+-dontwarn com.squareup.picasso.**
+
+
 
 #FastJson
 -keepclassmembers class * implements java.io.Serializable {

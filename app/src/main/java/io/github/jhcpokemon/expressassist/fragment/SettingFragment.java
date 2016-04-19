@@ -5,13 +5,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -39,11 +39,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
             + "is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied"
             + ".\nSee the License for the specific language governing permissions and\nlimitations under the License.";
     @Bind(R.id.version)
-    TextView versionTextView;
+    Button versionBtn;
     @Bind(R.id.policy)
-    TextView policyTextView;
+    Button policyBtn;
     @Bind(R.id.clear)
-    TextView clearTextView;
+    Button clearBtn;
     private int count = 5;
 
     public SettingFragment() {
@@ -54,9 +54,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         ButterKnife.bind(this, view);
-        versionTextView.setOnClickListener(this);
-        policyTextView.setOnClickListener(this);
-        clearTextView.setOnClickListener(this);
+        versionBtn.setOnClickListener(this);
+        policyBtn.setOnClickListener(this);
+        clearBtn.setOnClickListener(this);
         return view;
     }
 
@@ -91,7 +91,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                     imageDialog.setContentView(R.layout.image_dialog);
                     imageDialog.setCancelable(true);
                     imageDialog.show();
-                    versionTextView.setClickable(false);
+                    versionBtn.setClickable(false);
                 } else {
                     count--;
                 }
@@ -103,7 +103,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                         super.onCreate(savedInstanceState);
                         setTitle(R.string.policy);
                         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_policy, null, false);
-                        policyTextView = (TextView) view.findViewById(R.id.policy);
+                        TextView policyTextView = (TextView) view.findViewById(R.id.policy);
                         policyTextView.setText(policy);
                         setContentView(view);
                         setCancelable(true);

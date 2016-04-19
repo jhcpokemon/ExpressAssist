@@ -23,42 +23,42 @@
         android:textSize="36sp" />
 
 
-    <TextView
+    <Button
         android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/textview_bg"
+        style="?android:attr/buttonBarButtonStyle"
         android:gravity="center"
         android:paddingBottom="@dimen/item_padding"
         android:paddingTop="@dimen/item_padding"
         android:text="@string/version_code"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
-    <TextView
+    <Button
         android:id="@+id/clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_above="@id/policy"
-        android:background="@drawable/textview_bg"
         android:gravity="center"
         android:paddingBottom="@dimen/item_padding"
         android:paddingTop="@dimen/item_padding"
         android:text="@string/clear"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
-    <TextView
+    <Button
         android:id="@+id/policy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/version"
-        android:background="@drawable/textview_bg"
+        style="?android:attr/buttonBarButtonStyle"
         android:gravity="center"
         android:paddingBottom="@dimen/item_padding"
         android:paddingTop="@dimen/item_padding"
         android:text="@string/policy"
-        android:textSize="24sp" />
+        android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"

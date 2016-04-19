@@ -15,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,12 +25,9 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.plus.Plus;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -42,7 +38,6 @@ import io.github.jhcpokemon.expressassist.fragment.ExpressItemFragment;
 import io.github.jhcpokemon.expressassist.fragment.SearchFragment;
 import io.github.jhcpokemon.expressassist.fragment.SettingFragment;
 import io.github.jhcpokemon.expressassist.model.ExpressLog;
-import io.github.jhcpokemon.expressassist.util.UtilPack;
 
 public class ContainerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ExpressItemFragment.OnListItemClickListener, View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
@@ -97,6 +92,11 @@ public class ContainerActivity extends AppCompatActivity
             }
             mailTextView.setText(account.getEmail());
             nameTextView.setText(account.getDisplayName());
+        } else {
+            avatarImageView.setImageResource(R.drawable.default_avatar);
+            mailTextView.setText(intent.getStringExtra("mail"));
+            logoutBtn.setVisibility(View.GONE);
+            nameTextView.setVisibility(View.GONE);
         }
         if (!intent.getBooleanExtra("empty", false)) {
             manager.beginTransaction().add(R.id.container, historyFragment).commit();
@@ -105,12 +105,10 @@ public class ContainerActivity extends AppCompatActivity
         }
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestScopes(new Scope(Scopes.PLUS_LOGIN))
                 .requestEmail()
                 .build();
         client = new GoogleApiClient.Builder(this).enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .addApi(Plus.API)
                 .build();
     }
 
