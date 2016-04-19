@@ -21,7 +21,7 @@
     <string name="nav_setting">设置</string>
     <string name="nav_share">分享</string>
     <string name="nav_social">社交</string>
-    <string name="share_message">我向你推荐这款app,它很好用并且可以在这里下载：</string>
+    <string name="share_message">我向你推荐这款app,它很好用并且可以在这里下载：https://github.com/jhcpokemon/ExpressAssist/releases/tag/0.9</string>
     <string name="send_to">发送到…</string>
     <string name="save_email_pw">保存邮箱和密码</string>
     <string name="auto_login">自动登录</string>

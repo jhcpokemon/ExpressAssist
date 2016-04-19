@@ -29,7 +29,7 @@
     <string name="nav_setting">Setting</string>
     <string name="nav_share">Share</string>
     <string name="nav_social">Communication</string>
-    <string name="share_message">I prompt this app to you for its useful,you can download it at this address:</string>
+    <string name="share_message">I prompt this app to you for its useful,you can download it at this address:https://github.com/jhcpokemon/ExpressAssist/releases/tag/0.9</string>
     <string name="send_to">Send to …</string>
     <string name="save_email_pw">Save email&amp;password</string>
     <string name="auto_login">Auto login</string>

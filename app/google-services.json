@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "expressassist-93107",
+    "project_number": "593568059089",
+    "name": "ExpressAssist"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593568059089:android:41815c40bca3f617",
+        "client_id": "android:io.github.jhcpokemon.expressassist",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "io.github.jhcpokemon.expressassist",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593568059089-04v5459odr9rih7hok7gl40sddbev5q1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.github.jhcpokemon.expressassist",
+            "certificate_hash": "97905A1B846FE6918F725E25FC937AA0F4CB6732"
+          }
+        },
+        {
+          "client_id": "593568059089-nhrlgqj3litpbasgjqjv6f4vhor261ag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
