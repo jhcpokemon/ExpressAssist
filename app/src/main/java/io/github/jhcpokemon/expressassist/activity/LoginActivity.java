@@ -197,6 +197,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mIntent.putExtra("empty", false);
         }
         mIntent.putExtra("mail", mEmailView.getText().toString());
+        mIntent.putExtra("local", true);
         return mIntent;
     }
 

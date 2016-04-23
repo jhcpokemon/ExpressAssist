@@ -1,6 +1,9 @@
 package io.github.jhcpokemon.expressassist.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -144,6 +147,7 @@ public class DetailActivity extends AppCompatActivity {
          */
         @Override
         protected String doInBackground(String... url) {
+            if (!UtilPack.isOnline(getApplicationContext())) return "[]";
             Log.i(UtilPack.TAG, url[0]);
             StringBuilder jsonSB = new StringBuilder();
             BufferedReader bufferedReader;
@@ -200,5 +204,11 @@ public class DetailActivity extends AppCompatActivity {
         protected void onProgressUpdate(Integer... progress) {
             progressBar.setProgress(progress[0]);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (progressBar.getVisibility() == View.VISIBLE) progressBar.setProgress(100);
     }
 }

@@ -34,4 +34,11 @@
         android:text="@string/log_item_name"
         android:textAppearance="?attr/textAppearanceListItem" />
 
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/dark_grey" />
+
 </RelativeLayout>

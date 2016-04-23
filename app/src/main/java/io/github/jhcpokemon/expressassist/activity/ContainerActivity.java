@@ -38,6 +38,7 @@ import io.github.jhcpokemon.expressassist.fragment.ExpressItemFragment;
 import io.github.jhcpokemon.expressassist.fragment.SearchFragment;
 import io.github.jhcpokemon.expressassist.fragment.SettingFragment;
 import io.github.jhcpokemon.expressassist.model.ExpressLog;
+import io.github.jhcpokemon.expressassist.util.UtilPack;
 
 public class ContainerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ExpressItemFragment.OnListItemClickListener, View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
@@ -71,7 +72,7 @@ public class ContainerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
-        if (!isOnline()) {
+        if (!UtilPack.isOnline(this)) {
             Toast.makeText(getApplicationContext(), R.string.error_network, Toast.LENGTH_LONG).show();
         }
 
@@ -92,7 +93,7 @@ public class ContainerActivity extends AppCompatActivity
             }
             mailTextView.setText(account.getEmail());
             nameTextView.setText(account.getDisplayName());
-        } else {
+        } else if (intent.getBooleanExtra("local", false)) {
             avatarImageView.setImageResource(R.drawable.default_avatar);
             mailTextView.setText(intent.getStringExtra("mail"));
             logoutBtn.setVisibility(View.GONE);
@@ -160,11 +161,6 @@ public class ContainerActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
 
     @Override
     public void onClick(View v) {
